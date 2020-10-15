@@ -25,5 +25,16 @@ namespace Andreys.Controllers
             var userId=this._productsService.Add(input);
             return this.View();
         }
+
+        public HttpResponse Details(int id)
+        {
+            var product = this._productsService.GetById(id);
+
+            return this.View(product);
+        }
+
+
+
+
     }
 }

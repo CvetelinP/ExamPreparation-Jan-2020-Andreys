@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Andreys.Data;
 using Andreys.Models;
 using Andreys.ViewModels.Products;
@@ -34,6 +36,21 @@ namespace Andreys.Services
             return product.Id;
 
         }
+
+        public IEnumerable<Product> GetAll()
+            => this._db.Products.Select(x => new Product
+            {
+                Id = x.Id,
+                Name = x.Name,
+                ImageUrl = x.ImageUrl,
+                Price = x.Price
+            }).ToArray();
+
+        public Product GetById(int id)
+            => this._db.Products.FirstOrDefault(x => x.Id == id);
+
+
+
         //public string Name { get; set; }
 
         //public string Description { get; set; }

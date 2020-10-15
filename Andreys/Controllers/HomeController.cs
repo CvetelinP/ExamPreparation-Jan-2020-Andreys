@@ -7,8 +7,13 @@ namespace Andreys.App.Controllers
 
     public class HomeController : Controller
     {
-        private readonly IProductsService productsService;
+        private readonly ProductsService _productsService;
 
+
+        public HomeController(ProductsService productsService)
+        {
+            _productsService = productsService;
+        }
       
 
         [HttpGet("/")]
@@ -19,6 +24,16 @@ namespace Andreys.App.Controllers
 
           public HttpResponse Index()
           {
+
+
+              if (IsUserLoggedIn())
+              {
+                  var allproducts = _productsService.GetAll();
+
+
+                  return this.View(allproducts, "Home");
+              }
+              
   
               return this.View();
           }
